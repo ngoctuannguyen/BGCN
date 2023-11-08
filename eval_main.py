@@ -28,7 +28,7 @@ def main():
     # load data
     bundle_train_data, bundle_test_data, item_data, assist_data = \
         dataset.get_dataset(CONFIG['path'], CONFIG['dataset_name'], task=CONFIG['eval_task'])
-    bundle_test_loader = DataLoader(bundle_test_data, 4096, False,
+    bundle_test_loader = DataLoader(bundle_test_data, 8, False,
                              num_workers=2, pin_memory=True)
     test_loader = bundle_test_loader
 
@@ -38,8 +38,8 @@ def main():
     bi_graph = assist_data.ground_truth_b_i
 
     # metric
-    metrics = [Recall(20), NDCG(20), Recall(40), NDCG(40), Recall(80), NDCG(80)]
-    TARGET = 'Recall@20'
+    metrics = [Recall(1), NDCG(1), Recall(3), NDCG(3), Recall(5), NDCG(5)]
+    TARGET = 'Recall@1'
 
     # log
     log = logger.Logger(os.path.join(
